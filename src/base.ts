@@ -5,7 +5,7 @@ export const BASE_URL = "https://api.better-call.dev/v1";
 export const api = axios.create({ baseURL: BASE_URL });
 
 export type BcdRequestParams<T> = T &
-  Pick<AxiosRequestConfig, "headers" | "timeout" | "auth" | "cancelToken">;
+  Omit<AxiosRequestConfig, "method" | "url" | "params">;
 
 export function buildQuery<P extends Record<string, unknown>, R = any>(
   method: "GET" | "POST",
@@ -26,16 +26,12 @@ export function buildQuery<P extends Record<string, unknown>, R = any>(
             )
           )
         : undefined;
-    const { headers, timeout, auth, cancelToken } = params;
 
     return axios.request<R>({
       method,
       url,
       params: queryParams,
-      headers,
-      timeout,
-      auth,
-      cancelToken,
+      ...params,
     });
   };
 }
