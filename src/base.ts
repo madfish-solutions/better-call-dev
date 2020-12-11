@@ -3,6 +3,7 @@ import axios, { AxiosRequestConfig } from "axios";
 export const BASE_URL = "https://api.better-call.dev/v1";
 
 export const api = axios.create({ baseURL: BASE_URL });
+api.interceptors.response.use((res) => res.data);
 
 export type BcdRequestParams<T> = T &
   Omit<AxiosRequestConfig, "method" | "url" | "params">;
@@ -23,7 +24,7 @@ export function buildQuery<P extends Record<string, unknown>, R = any>(
         ? pick(params, toQueryParams)
         : undefined;
 
-    return axios.request<R>({
+    return api.request<R>({
       method,
       url,
       params: queryParams,
