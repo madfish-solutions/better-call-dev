@@ -1,3 +1,22 @@
+## Usage
+
+```
+npm install better-call-dev
+```
+
+```ts
+import * as Bcd from "better-call-dev";
+
+(async () => {
+  const accountInfo = await Bcd.getAccount({
+    network: "mainnet",
+    address: "tz1fVQangAfb9J1hRRMP2bSB6LvASD6KpY8A",
+  });
+
+  console.info(accountInfo);
+})();
+```
+
 # TSDX User Guide
 
 Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
@@ -76,7 +95,7 @@ declare var __DEV__: boolean;
 
 // inside your code...
 if (__DEV__) {
-  console.log('foo');
+  console.log("foo");
 }
 ```
 
