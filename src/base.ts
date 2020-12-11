@@ -20,11 +20,7 @@ export function buildQuery<P extends Record<string, unknown>, R = any>(
       typeof toQueryParams === "function"
         ? toQueryParams(params)
         : toQueryParams
-        ? Object.fromEntries(
-            Object.entries(params).filter(([key]) =>
-              toQueryParams.includes(key)
-            )
-          )
+        ? pick(params, toQueryParams)
         : undefined;
 
     return axios.request<R>({
@@ -34,6 +30,16 @@ export function buildQuery<P extends Record<string, unknown>, R = any>(
       ...params,
     });
   };
+}
+
+function pick<T, U extends keyof T>(obj: T, keys: U[]) {
+  const newObj: Partial<T> = {};
+  keys.forEach((key) => {
+    if (key in obj) {
+      newObj[key] = obj[key];
+    }
+  });
+  return newObj as Pick<T, U>;
 }
 
 /**
