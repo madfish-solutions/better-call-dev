@@ -23,14 +23,12 @@ export function buildQuery<P extends Record<string, unknown>, R = any>(
         ? pick(params, toQueryParams)
         : undefined;
 
-    return api
-      .request<R>({
-        method,
-        url,
-        params: queryParams,
-        ...params,
-      })
-      .then((r) => r.data);
+    return api.request<R>({
+      method,
+      url,
+      params: queryParams,
+      ...params,
+    });
   };
 }
 
