@@ -41,12 +41,12 @@ export interface BcdAccountInfo {
 export interface BcdAccountToken {
   balance: number;
   contract: string;
-  decimals: number;
-  extras?: any;
+  decimals?: number;
   level?: number;
   name?: string;
-  network?: string;
-  registry_address?: string;
+  network: string;
   symbol?: string;
   token_id: number;
+  token_info?: any;
+  volume_24_hours?: number;
 }
